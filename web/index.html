@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>台股 Beta 研究室</title><link rel="stylesheet" href="/style.css"><script defer src="/app.js"></script></head>
+<body>
+<header><a href="/" class="brand">β <span>台股 Beta 研究室</span></a><span class="tag">個股 · ETF · 市場敏感度</span></header>
+<main>
+<section class="intro"><div class="eyebrow">TAIWAN MARKET / BETA LAB</div><h1>這檔股票，跟大盤走多近？</h1><p>用同期間的歷史報酬，算出個股與 ETF 對台股市場的敏感度。</p></section>
+<form id="query" class="panel">
+<div class="formtop"><label class="codes">台股代號 <input id="codes" value="2330, 0050, 00878" placeholder="例如 2330, 0050, 6488.TWO" required maxlength="100"><small>最多 8 檔，以空白或逗號分隔；上櫃代號自動查找。</small></label><button id="submit" type="submit">計算 Beta <span>↗</span></button></div>
+<div class="chips"><span>快速加入</span><button type="button" data-code="2330">2330 台積電</button><button type="button" data-code="2317">2317 鴻海</button><button type="button" data-code="0050">0050 元大台灣50</button><button type="button" data-code="00631L">00631L 台灣50正2</button><button type="button" data-code="6488.TWO">6488 環球晶</button></div>
+<div class="settings"><label>起始日期<input id="start" type="date" required></label><label>結束日期<input id="end" type="date" required></label><label>報酬頻率<select id="frequency"><option value="daily">日報酬</option><option value="weekly">週報酬</option><option value="monthly">月報酬</option></select></label><label>比較基準與價格口徑<select id="mode"><option value="price">加權指數 · 價格報酬</option><option value="adjusted">0050 代理 · 含息調整價</option></select></label><label>無風險年利率（%）<input id="rf" type="number" min="0" max="20" step="0.1" value="0" required></label></div>
+<div class="presets"><span>期間</span><button type="button" data-years="1">近 1 年</button><button type="button" data-years="3" class="active">近 3 年</button><button type="button" data-years="5">近 5 年</button><span class="hint">預設利率為 0；截距不代表已證實的超額績效。</span></div>
+</form>
+<div id="status" role="status" aria-live="polite">設定標的與期間後，點選「計算 Beta」。</div>
+<section id="results" hidden>
+<div class="sectiontitle"><h2>市場敏感度比較</h2><button id="export" type="button" class="secondary">下載計算 CSV ↓</button></div>
+<p id="context" class="muted"></p><div class="tablewrap"><table><thead><tr><th>標的</th><th>Beta</th><th>R² 解釋力</th><th>相關係數</th><th>每期截距</th><th>樣本／有效期間</th><th>圖表</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="chartlayout"><section class="panel chartpanel"><div class="sectiontitle"><div><div class="eyebrow">RETURN REGRESSION</div><h2 id="charttitle">報酬散點與迴歸線</h2></div><span id="equation" class="tag"></span></div><svg id="chart" viewBox="0 0 800 460" role="img" aria-label="個股與基準的報酬散點及迴歸線"></svg><p id="chartcaption" class="muted"></p></section><aside class="panel reading"><div class="eyebrow">HOW TO READ</div><h2>把 Beta 讀成敏感度</h2><div class="bigbeta" id="bigbeta">—</div><p id="interpretation"></p><hr><h3>R² 看解釋力</h3><p>越接近 100%，這段期間的報酬變化越能被基準的線性變動解釋。Beta 高低與 R² 是兩件事。</p><h3>截距看模型剩餘</h3><p>截距是每期的估計值。基準、利率與價格口徑都會改變它；本工具不把它當作經理人能力的證據。</p><p id="warnings" class="warning"></p></aside></div>
+</section>
+<section class="method panel"><h2>計算方式與資料邊界</h2><div class="methodgrid"><div><h3>01 / 相同日期，才比較</h3><p>Beta = Cov(標的超額報酬, 基準超額報酬) ÷ Var(基準超額報酬)。以含截距的 OLS 估計，採簡單報酬。無風險年利率依日 252、週 52、月 12 期複利換算。</p></div><div><h3>02 / 完整期間，不補價格</h3><p>排除今日行情、未完成週／月與不一致的價格端點，不以前值填補缺漏。每檔至少 12 筆有效樣本；少於 30 筆會提示。多檔可能有不同有效期間。</p></div><div><h3>03 / 明確的比較口徑</h3><p>預設使用 Yahoo 收盤價對加權價格指數（^TWII），不含現金股利再投資。含息模式使用 Yahoo 調整價對 0050 調整價；0050 是大型股 ETF 代理，並非全市場報酬指數。</p></div></div><p class="footnote">行情來源：Yahoo Finance，成功查詢暫存 1 小時。歷史 Beta 隨估計期間改變，不能保證未來漲跌幅；槓桿、反向或海外資產 ETF 的台股 Beta 也不等於產品槓桿倍數。<a href="https://www.twse.com.tw/downloads/zh/products/indices/IndexS02.pdf" target="_blank" rel="noopener noreferrer">加權指數編製說明 ↗</a></p></section>
+<footer>TAIWAN BETA LAB <span>本機研究工具 · 不含交易功能</span></footer>
+</main></body></html>
