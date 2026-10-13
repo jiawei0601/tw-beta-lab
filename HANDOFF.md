@@ -10,6 +10,9 @@
 
 ## 驗證證據
 
+- 2026-10-13 指標說明更新：介面與README新增Beta／R²定義、1.2與80%例子、低Beta與R²常見誤解、Beta數值及四種組合對照。介面說明查詢前後均可閱讀，表格使用原生details展開；保留Freddy投資課標示。
+- 本次僅文字與版面修改，未變動計算／資料流程；`git diff --check`、`node --check web/app.js`通過，實際瀏覽器確認說明與展開表格，畫面在 `evidence/beta-r2-guide.png`。依局部文件／介面文案修改範圍驗證，未重跑行情查詢。
+
 - `python -m unittest discover -s tests -v`：14項通過。
 - `node --check web/app.js`：通過。
 - `python tools/smoke.py`：日／週／月及上櫃自動解析、含息模式、輸入拒絕、跨來源403皆通過；原始回應在 `evidence/live-smoke.json`。
