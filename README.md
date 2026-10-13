@@ -1,4 +1,8 @@
-# 台股 Beta 研究室
+# 台股 Beta 研究室｜Freddy 投資課內容
+
+**課程歸屬標籤：Freddy 投資課內容。**
+
+本 repo 是依使用者提供的 Freddy 投資課 Beta／Alpha 說明製作的學習實作，將「Beta 是迴歸線斜率、Alpha 是模型截距」轉為可操作的台股個股與 ETF 查詢工具。課程脈絡與標示範圍見 [課程說明](docs/course-context.md)。行情另取自 Yahoo Finance。
 
 查詢上市／上櫃個股與 ETF 相對台股市場的歷史 Beta。本機網頁工具，Python 3.12+ 標準函式庫，不需 API 金鑰或安裝套件。
 
@@ -40,3 +44,5 @@
 `node --check web/app.js`
 
 驗證證據與正式審查狀態見 HANDOFF.md。
+
+目前狀態：本機功能與自檢完成，跨廠商正式程式審查尚未完成。此 repo 提供課程學習與研究實作。
